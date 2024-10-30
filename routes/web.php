@@ -20,6 +20,6 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('event', EventController::class);
 
-Route::get('/{event}/contestants', [EventController::class, 'show_contestants'])->name('contestants');
+Route::get('{event}/contestants', [EventController::class, 'show_contestants'])->name('event.contestants');
 
 require __DIR__.'/auth.php';

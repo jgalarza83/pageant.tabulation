@@ -7,7 +7,7 @@
         <x-category
             title="{{ucwords($event->name)}}"
             image="https://placehold.co/300x600"
-            link="{{route('contestants',$event->id)}}"
+            link="{{route('event.contestants',$event->id)}}"
         />
     @endforeach
 </div>

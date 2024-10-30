@@ -65,10 +65,11 @@ class EventController extends Controller
         //
     }
 
-    public function show_contestants(Event $event)
+    public function show_contestants($event)
     {
-        $contestants = Contestant::all();
+        $event = Event::where('id',$event)->get(['id','name']);
+        $contestants = Contestant::join('groups','groups.group_id','group_id')->get('name');
         dd($contestants);
-        return view('event.contestants');
+        return view('event.contestants', compact('event','contestants'));
     }
 }
