@@ -15,6 +15,18 @@ export default {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
         },
+        colors: {
+            'sparrows' : '#ffffff',
+            'falcons' : '#3C280D',
+            'parrots' : '#028A0F',
+            'bluebirds' : '#f04a00',
+            'pelicans' : '#0A1172',
+            'hawks' : '#702963',
+            'terns' : '#616569',
+            'cardinals' : '#b90e0a',
+            'skylarks' : '#333333',
+            'hummingbirds' : '#fc7f9c',
+        }
     },
 
     plugins: [forms],

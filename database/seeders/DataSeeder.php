@@ -18,12 +18,16 @@ class DataSeeder extends Seeder
     {
         // GROUP Table
         $groups = [
-            ['Swift Sparrows', '#ffffff'],
-            ['Java Falcons', '#3C280D'],
-            ['Python Parrots', '#028A0F'],
-            ['SQL Bluebirds', '#f04a00'],
-            ['C# Pelicans', '#0A1172'],
-            ['PHP Hawks', '#702963'],
+            ['Swift Sparrows', 'sparrows'],
+            ['Java Falcons', 'falcons'],
+            ['Python Parrots', 'parrots'],
+            ['SQL Bluebirds', 'bluebirds'],
+            ['C# Pelicans', 'pelicans'],
+            ['PHP Hawks', 'hawks'],
+            ['TypeScript Terns', 'terns'],
+            ['CSS Cardinals', 'cardinals'],
+            ['Scala Skylarks', 'skylarks'],
+            ['HTML Hummingbirds', 'hummingbirds'],
         ];
 
         foreach ($groups as $group)
