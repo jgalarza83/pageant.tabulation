@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\EventCriterias;
+use App\Models\EventCriteria;
 use Illuminate\Http\Request;
 
-class EventCriteriasController extends Controller
+class EventCriteriaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class EventCriteriasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(EventCriterias $eventCriterias)
+    public function show(EventCriteria $eventCriterias)
     {
         //
     }
@@ -42,7 +42,7 @@ class EventCriteriasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(EventCriterias $eventCriterias)
+    public function edit(EventCriteria $eventCriterias)
     {
         //
     }
@@ -50,7 +50,7 @@ class EventCriteriasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, EventCriterias $eventCriterias)
+    public function update(Request $request, EventCriteria $eventCriterias)
     {
         //
     }
@@ -58,7 +58,7 @@ class EventCriteriasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(EventCriterias $eventCriterias)
+    public function destroy(EventCriteria $eventCriterias)
     {
         //
     }

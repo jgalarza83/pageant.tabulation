@@ -21,5 +21,6 @@ Route::middleware('auth')->group(function () {
 Route::resource('event', EventController::class);
 
 Route::get('{event}/contestants', [EventController::class, 'show_contestants'])->name('event.contestants');
+Route::get('{event}/{contestant}/score', [EventController::class, 'add_score'])->name('event.score');
 
 require __DIR__.'/auth.php';

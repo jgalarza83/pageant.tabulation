@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EventCriterias extends Model
+class EventCriteria extends Model
 {
     protected $primaryKey = 'event_criteria_id';
     protected $fillable = [
