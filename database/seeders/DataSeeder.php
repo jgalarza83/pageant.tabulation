@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Contestant;
 use App\Models\Role;
 use App\Models\Event;
 use App\Models\Group;
@@ -110,5 +111,12 @@ class DataSeeder extends Seeder
             ["TBA",9],
             ["TBA",10],
         ];
+
+
+        foreach ($contestants as $contestant)
+            Contestant::create([
+                'name' => $contestant[0],
+                'group_id' => $contestant[1],
+            ]);
     }
 }
