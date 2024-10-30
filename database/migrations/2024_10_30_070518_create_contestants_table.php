@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('group_id');
-            $table->string('photo_path');
+            $table->string('photo_path')->nullable();
             $table->timestamps();
         });
     }

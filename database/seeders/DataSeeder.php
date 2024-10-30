@@ -18,10 +18,10 @@ class DataSeeder extends Seeder
     {
         // GROUP Table
         $groups = [
-            ['Swift Sparrows', 'sparrows'],
-            ['Java Falcons', 'falcons'],
-            ['Python Parrots', 'parrots'],
             ['SQL Bluebirds', 'bluebirds'],
+            ['Python Parrots', 'parrots'],
+            ['Java Falcons', 'falcons'],
+            ['Swift Sparrows', 'sparrows'],
             ['C# Pelicans', 'pelicans'],
             ['PHP Hawks', 'hawks'],
             ['TypeScript Terns', 'terns'],
@@ -96,5 +96,19 @@ class DataSeeder extends Seeder
             Role::create([
                 'name' => $role,
             ]);
+
+        // CONTESTANTS Table
+        $contestants = [
+            ["Beth Grace L. Patricio",1],
+            ["Bhebz Cabantao",2],
+            ["Maureen Jane P. Mangmang",3],
+            ["Daphne Jeanne J. Omega",4],
+            ["Janna C. Priego",5],
+            ["Nizael A. Pardillo",6],
+            ["TBA",7],
+            ["TBA",8],
+            ["TBA",9],
+            ["TBA",10],
+        ];
     }
 }
