@@ -22,5 +22,6 @@ Route::resource('event', EventController::class);
 
 Route::get('{event}/contestants', [EventController::class, 'show_contestants'])->name('event.contestants');
 Route::get('{event}/{contestant}/score', [EventController::class, 'add_score'])->name('event.score');
+Route::get('/score/recorded', [EventController::class, 'submit'])->name('event.submit');
 
 require __DIR__.'/auth.php';

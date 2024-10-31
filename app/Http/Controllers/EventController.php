@@ -90,4 +90,9 @@ class EventController extends Controller
             get(['event_criterias.id','criterias.name as criteria', 'events.name as event']);
         return view('event.score', compact('event', 'contestant', 'criterias'));
     }
+
+    public function submit()
+    {
+        return view('event.submit');
+    }
 }
