@@ -82,7 +82,12 @@ class EventController extends Controller
     public function add_score($event, $contestant)
     {
         $event = Event::where('id', $event)->first(['id', 'name']);
-        $contestant = Contestant::where('id', $contestant)->first(['name']);
+
+        $contestant = Contestant::where('id', $contestant)->first(['id','name']);
+        $contestant['max'] = Contestant::count();
+        $contestant['prev'] = Contestant::where('id', $contestant['id'] == 1 ? $contestant['max'] : $contestant['id']-1)->first('name');
+        $contestant['next'] = Contestant::where('id', $contestant['id'] == $contestant['max'] ? 1 : $contestant['id']+1)->first('name');
+
         $criterias = EventCriteria::
             join('criterias','criterias.id','event_criterias.criteria_id')->
             join('events','events.id','event_criterias.event_id')->
