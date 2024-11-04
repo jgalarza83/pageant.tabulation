@@ -28,16 +28,20 @@ class ScoreController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->except(['_token','event_id','contestant_id']);
-        foreach ($data as $id => $score) {
-            // dump('Event '.(int)$request->event_id. ', Contestant '.(int)$request->contestant_id.', Criteria '.$id.', Score '.$score);
-            $model = Score::updateOrCreate(
-                    ['event_id'=>$request->event_id, 'contestant_id'=>$request->contestant_id, 'criteria_id'=>$id],
-                    ['score' => (int)$score]
-                );
-                dump($model->wasChanged()?'Update':'NoChange');
+        $data = $request->except(['_token', 'event_id', 'contestant_id']);
+        foreach ($data as $id => $value) {
+            $score = Score::where('event_id', $request->event_id)->
+                where('contestant_id', $request->contestant_id)->
+                where('criteria_id', $id)->update(['score' => $value]);
+            if (!$score)
+                Score::create([
+                    'event_id' => $request->event_id,
+                    'contestant_id' => $request->contestant_id,
+                    'criteria_id' => $id,
+                    'score' => $value,
+                ]);
         }
-        // return back();
+        return back();
     }
 
     /**

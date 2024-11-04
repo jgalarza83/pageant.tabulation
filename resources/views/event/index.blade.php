@@ -14,7 +14,7 @@
 @extends('layouts.app')
 
 @section('content')
-   <x-header-title class="my-10">Categories</x-header-title>
+   <x-header-title class="my-10">Events</x-header-title>
    <div class="grid grid-cols-6 px-24 gap-10 mb-8">
       @foreach ($events as $event)
          <x-category
