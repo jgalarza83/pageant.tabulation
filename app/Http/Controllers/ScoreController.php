@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use App\Models\Score;
+use App\Models\Contestant;
 use Illuminate\Http\Request;
 
 class ScoreController extends Controller
@@ -12,7 +14,33 @@ class ScoreController extends Controller
      */
     public function index()
     {
-        //
+        $events = Event::all('id', 'name');
+        $contestants = Contestant::all('id', 'name');
+        $byEvents = [];
+        $byContestants = [];
+        foreach ($events as $event) {
+            $scores = [];
+            foreach ($contestants as $contestant) {
+                $myScore = 0;
+                foreach (Score::where('event_id', $event->id)->where('contestant_id', $contestant->id)->get() as $score)
+                    $myScore += $score->score;
+                $scores[$contestant->name] = $myScore;
+            }
+            $byEvents[$event->name] = $scores;
+        }
+
+
+        foreach ($contestants as $contestant) {
+            $scores = [];
+            foreach ($events as $event) {
+                $myScore = 0;
+                foreach (Score::where('event_id', $event->id)->where('contestant_id', $contestant->id)->get() as $score)
+                    $myScore += $score->score;
+                $scores[$event->name] = $myScore;
+            }
+            $byContestants[$contestant->name] = $scores;
+        }
+        return view('score.index', compact('byEvents','byContestants'));
     }
 
     /**

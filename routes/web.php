@@ -27,6 +27,8 @@ Route::get('{event}/{contestant}/score', [EventController::class, 'add_score'])-
 Route::get('/score/recorded', [EventController::class, 'submit'])->name('event.submit');
 
 Route::resource('eventcriteria', EventCriteriaController::class);
+Route::resource('score', ScoreController::class);
+
 Route::post('event/score', [ScoreController::class,'store'])->name('score.store');
 
 require __DIR__.'/auth.php';
