@@ -21,7 +21,6 @@
             title="{{ ucwords($event->name) }}"
             image="{{ $photos[$event->name] == null ? 'https://placehold.co/300x600' : asset('/img/' . $photos[$event->name]) }}"
             link="{{ route('event.contestants', $event->id) }}"
-            {{-- class="" --}}
          />
 
       @endforeach

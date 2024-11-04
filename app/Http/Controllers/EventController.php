@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\EventCriteria;
+use App\Models\Score;
 use App\Models\Contestant;
 use Illuminate\Http\Request;
-use App\Models\EventCriteria;
 
 class EventController extends Controller
 {
@@ -83,21 +84,28 @@ class EventController extends Controller
     {
         $event = Event::where('id', $event)->first(['id', 'name']);
 
-        $contestant = Contestant::where('id', $contestant)->first(['id','name']);
+        $contestant = Contestant::where('id', $contestant)->first(['id', 'name']);
         $contestant['max'] = Contestant::count();
-        $contestant['prev'] = Contestant::where('id', $contestant['id'] == 1 ? $contestant['max'] : $contestant['id']-1)->first('name');
-        $contestant['next'] = Contestant::where('id', $contestant['id'] == $contestant['max'] ? 1 : $contestant['id']+1)->first('name');
+        $contestant['prev'] = Contestant::where('id', $contestant['id'] == 1 ? $contestant['max'] : $contestant['id'] - 1)->first('name');
+        $contestant['next'] = Contestant::where('id', $contestant['id'] == $contestant['max'] ? 1 : $contestant['id'] + 1)->first('name');
 
         $criterias = EventCriteria::
-            join('criterias','criterias.id','event_criterias.criteria_id')->
-            join('events','events.id','event_criterias.event_id')->
+            join('criterias', 'criterias.id', 'event_criterias.criteria_id')->
+            join('events', 'events.id', 'event_criterias.event_id')->
             where('event_id', $event->id)->
-            get(['event_criterias.id','criterias.name as criteria', 'events.name as event']);
-        return view('event.score', compact('event', 'contestant', 'criterias'));
-    }
+            get(['event_criterias.id', 'criterias.name as criteria', 'events.name as event']);
 
-    public function submit()
-    {
-        return view('event.submit');
+        $scores = Score::
+            where('event_id', $event['id'])->
+            where('contestant_id', $contestant['id'])->
+            get(['criteria_id', 'score']);
+
+        foreach ($criterias as $criteria)
+            foreach ($scores as $score)
+                if ($criteria['id'] == $score['criteria_id']) {
+                    $criteria['score'] = $score['score'];
+                    break;
+                }
+        return view('event.score', compact('event', 'contestant', 'criterias'));
     }
 }

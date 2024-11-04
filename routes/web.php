@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\ScoreController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\EventCriteriaController;
 
 Route::get('/', function () {
     return view('home');
@@ -23,5 +25,8 @@ Route::resource('event', EventController::class);
 Route::get('{event}/contestants', [EventController::class, 'show_contestants'])->name('event.contestants');
 Route::get('{event}/{contestant}/score', [EventController::class, 'add_score'])->name('event.score');
 Route::get('/score/recorded', [EventController::class, 'submit'])->name('event.submit');
+
+Route::resource('eventcriteria', EventCriteriaController::class);
+Route::post('event/score', [ScoreController::class,'store'])->name('score.store');
 
 require __DIR__.'/auth.php';
