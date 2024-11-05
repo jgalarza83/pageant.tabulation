@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('scores', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
             $table->foreignId('event_id');
             $table->foreignId('contestant_id');
             $table->foreignId('criteria_id');

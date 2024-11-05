@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\Event;
 use App\Models\Group;
 use App\Models\Criteria;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -18,6 +19,33 @@ class DataSeeder extends Seeder
      */
     public function run(): void
     {
+        // ROLES Table
+        $roles = [
+            'admin',
+            'judge',
+            'guest',
+        ];
+
+        foreach ($roles as $role)
+            Role::create([
+                'name' => $role,
+            ]);
+
+        // USERS Table
+        $users = [
+            [1,'admin','1234'],
+            [2,'judge1','1111'],
+            [2,'judge2','2222'],
+            [2,'judge3','3333'],
+            [3,'guest','9876'],
+        ];
+        foreach ($users as $user)
+            User::create([
+                'role_id' => $user[0],
+                'name' => $user[1],
+                'passcode' => $user[2],
+            ]);
+
         // GROUP Table
         $groups = [
             ['SQL Bluebirds', 'bluebirds'],
@@ -26,10 +54,10 @@ class DataSeeder extends Seeder
             ['Swift Sparrows', 'sparrows'],
             ['C# Pelicans', 'pelicans'],
             ['PHP Hawks', 'hawks'],
-            ['TypeScript Terns', 'terns'],
-            ['CSS Cardinals', 'cardinals'],
-            ['Scala Skylarks', 'skylarks'],
-            ['HTML Hummingbirds', 'hummingbirds'],
+            // ['TypeScript Terns', 'terns'],
+            // ['CSS Cardinals', 'cardinals'],
+            // ['Scala Skylarks', 'skylarks'],
+            // ['HTML Hummingbirds', 'hummingbirds'],
         ];
 
         foreach ($groups as $group)
@@ -87,30 +115,18 @@ class DataSeeder extends Seeder
                 'name' => $criteria,
             ]);
 
-        // ROLES Table
-        $roles = [
-            'admin',
-            'judge',
-            'guest',
-        ];
-
-        foreach ($roles as $role)
-            Role::create([
-                'name' => $role,
-            ]);
-
         // CONTESTANTS Table
         $contestants = [
             ["Beth Grace L. Patricio",1],
-            ["Bhebz Cabantao",2],
+            ["Patricia Mikaela T. Catigan",2],
             ["Maureen Jane P. Mangmang",3],
             ["Daphne Jeanne J. Omega",4],
             ["Janna C. Priego",5],
             ["Nizael A. Pardillo",6],
-            ["TBA",7],
-            ["TBA",8],
-            ["TBA",9],
-            ["TBA",10],
+            // ["TBA",7],
+            // ["TBA",8],
+            // ["TBA",9],
+            // ["TBA",10],
         ];
 
         foreach ($contestants as $contestant)
