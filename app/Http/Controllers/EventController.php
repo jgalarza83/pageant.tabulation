@@ -96,6 +96,7 @@ class EventController extends Controller
             get(['event_criterias.id', 'criterias.name as criteria', 'events.name as event']);
 
         $scores = Score::
+            where('user_id', session('user'))->
             where('event_id', $event['id'])->
             where('contestant_id', $contestant['id'])->
             get(['criteria_id', 'score']);

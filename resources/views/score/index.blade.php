@@ -1,17 +1,25 @@
 @extends('layouts.app')
 @section('content')
    <x-header-title class="mt-10">Scores</x-header-title>
+   <div class="flex mt-2 gap-5 border border-gray-300 text-dark text-sm w-fit mx-auto px-5 py-1 rounded-md">
+      <span class="text-gray-300">|</span>
+      @foreach ($judges as $judge)
+         <label class=" text-gray-500">{{ $judge->name }}</label>
+         <span class="text-gray-300">|</span>
+      @endforeach
+   </div>
    <div class="flex justify-center mt-5 gap-20">
-      <div class="w-96">
-        <h2 class=" text-center text-xl mb-3">By Events</h2>
+      <div class="w-1/4">
+         <h2 class="text-center text-xl mb-3">By Events</h2>
          @foreach ($byEvents as $event => $contestant)
-            <x-accordion-item event="{{ ucwords($event) }}" :contestants="$contestant" />
+            <x-accordion-item label="{{ ucwords($event) }}" :array="$contestant" />
          @endforeach
       </div>
-      <div class="w-96">
-        <h2 class=" text-center text-xl mb-3">By Contestants</h2>
-        @foreach ($byContestants as $event => $contestant)
-            <x-accordion-item event="{{ ucwords($event) }}" :contestants="$contestant" />
+
+      <div class="w-1/4">
+         <h2 class=" text-center text-xl mb-3">By Contestants</h2>
+         @foreach ($byContestants as $event => $contestant)
+            <x-accordion-item label="{{ ucwords($event) }}" :array="$contestant" />
          @endforeach
       </div>
    </div>

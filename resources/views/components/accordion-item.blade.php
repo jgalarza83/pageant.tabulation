@@ -1,11 +1,17 @@
 <details class="w-full bg-white border cursor-pointer mb-3">
    <summary class="w-full bg-white text-dark flex justify-between px-4 py-3 after:content-['+']">
-      {{ $event }}
+      {{ $label }}
    </summary>
-       @foreach ($contestants as $contestant => $score)
-       <div class="flex justify-between px-4 py-3 w-80 mx-auto">
-           <span>{{ ucwords($contestant) }}</span>
-           <span>{{ $score }}</span>
-        </div>
-        @endforeach
+   @foreach ($array as $label => $judges)
+      <div class="grid grid-cols-[1fr,2em,2em,2em,2em,2em] px-2 py-3 mx-auto text-gray-600">
+         <span class="font-bold">{{ ucwords($label) }}</span>
+         @php $total = 0 @endphp
+         @foreach ($judges as $score)
+            <span class="text-center text-gray-400">{{ $score }}</span>
+            @php $total += $score @endphp
+         @endforeach
+         <span class="text-center">|</span>
+         <span class="font-bold text-center">{{ $total }}</span>
+      </div>
+   @endforeach
 </details>
