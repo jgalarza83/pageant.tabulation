@@ -2,7 +2,7 @@
 @section('content')
    <div class="mx-96 w-1/2 flex gap-20">
       <img src="https://placehold.co/300x800" alt="" class="self-start">
-      <div class="">
+      <div>
          <x-nav-link href="{{ route('event.index') }}">
             <x-svg name="chevron_left" />Back to Events
          </x-nav-link>
@@ -29,7 +29,7 @@
                   </x-primary-button>
                </div>
             </form>
-            <div class="flex justify-between w-full ">
+            <div class="flex justify-between w-full">
                <a href="{{ route('event.score', [$event->id, $contestant->id == 1 ? $contestant->max : $contestant->id - 1]) }}"
                   class="w-52 flex flex-col items-center">
                   <p class="text-sm text-gray-600 pb-2">{{ ucwords($contestant->prev->name) }}</p>
