@@ -4,7 +4,7 @@
    </summary>
    @foreach ($array as $label => $judges)
       <div class="grid grid-cols-[1fr,2em,2em,2em,2em,2em] px-2 py-3 mx-auto text-gray-600">
-         <span class="font-bold">{{ ucwords($label) }}</span>
+         <span class="font-bold lg:text-sm">{{ ucwords($label) }}</span>
          @php $total = 0 @endphp
          @foreach ($judges as $score)
             <span class="text-center text-gray-400">{{ $score }}</span>

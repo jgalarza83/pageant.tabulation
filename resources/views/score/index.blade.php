@@ -9,14 +9,14 @@
       @endforeach
    </div>
    <div class="flex justify-center mt-5 gap-20">
-      <div class="w-1/4">
+      <div class="xl:w-1/4 lg:w-96">
          <h2 class="text-center text-xl mb-3">By Events</h2>
          @foreach ($byEvents as $event => $contestant)
             <x-accordion-item label="{{ ucwords($event) }}" :array="$contestant" />
          @endforeach
       </div>
 
-      <div class="w-1/4">
+      <div class="xl:w-1/4 lg:w-96">
          <h2 class=" text-center text-xl mb-3">By Contestants</h2>
          @foreach ($byContestants as $event => $contestant)
             <x-accordion-item label="{{ ucwords($event) }}" :array="$contestant" />

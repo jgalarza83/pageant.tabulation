@@ -1,24 +1,30 @@
 <?php
 
-use App\Http\Controllers\ScoreController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EventController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ScoreController;
+// use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EventCriteriaController;
 
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
+
+Route::get('/',[AuthController::class, 'index'])->name('login');
+Route::post('/', [AuthController::class, 'login']);
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    dd(auth()->user());
+    return view('dashboard',['user'=>auth()->user()]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
+
 
 Route::resource('event', EventController::class);
 
@@ -31,4 +37,4 @@ Route::resource('score', ScoreController::class);
 
 Route::post('event/score', [ScoreController::class,'store'])->name('score.store');
 
-require __DIR__.'/auth.php';
+// require __DIR__.'/auth.php';
