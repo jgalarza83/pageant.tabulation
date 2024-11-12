@@ -11,13 +11,13 @@ use App\Http\Controllers\EventCriteriaController;
 //     return view('home');
 // });
 
-Route::get('/',[AuthController::class, 'index'])->name('login');
-Route::post('/', [AuthController::class, 'login']);
+Route::get('/',[AuthController::class, 'index'])->name('auth.index');
+Route::post('/', [AuthController::class, 'login'])->name('auth.login');
 
-Route::get('/dashboard', function () {
-    dd(auth()->user());
-    return view('dashboard',['user'=>auth()->user()]);
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     dd(auth()->user());
+//     return view('dashboard',['user'=>auth()->user()]);
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Route::middleware('auth')->group(function () {
 //     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -15,6 +15,9 @@ class ScoreController extends Controller
      */
     public function index()
     {
+        if (session()->get('name') != 'admin')
+            return back();
+
         $events = Event::all('id', 'name');
         $contestants = Contestant::all('id', 'name');
         $judges = User::where('role_id', 2)->get(['id', 'name']);
