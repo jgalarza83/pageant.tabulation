@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
    <div class="xl:mx-96 xl:w-1/2 flex gap-20">
-      <img src="https://placehold.co/300x800" alt="" class="self-start lg:h-[760px]">
+      <img src="{{ asset('img/contestants/tall/'.$contestant->photo_path.'-tall.png')}}" alt="" class="self-start">
       <div>
          <x-nav-link href="{{ route('event.index') }}">
             <x-svg name="chevron_left" />Back to Events
@@ -25,20 +25,24 @@
                </div>
                <div class="flex w-full justify-center">
                   <x-primary-button class="w-fit {{ session()->has('msg') ? 'bg-green-800' : '' }}">
-                     {{ session()->has('msg') ? 'Recorded' : 'Submit' }}
+                     {{ session()->has('msg') ? session()->get('msg') : 'Submit' }}
                   </x-primary-button>
                </div>
             </form>
             <div class="flex justify-between w-full pb-10">
-               <a href="{{ route('event.score', [$event->id, $contestant->id == 1 ? $contestant->max : $contestant->id - 1]) }}"
+               <a href="{{ route('event.score', [$event->id, $photo_prev = $contestant->id == 1 ? $contestant->max : $contestant->id - 1]) }}"
                   class="w-52 flex flex-col items-center">
                   <p class="text-sm text-gray-600 pb-2">{{ ucwords($contestant->prev->name) }}</p>
-                  <img src="https://placehold.co/300x300" alt="" class="w-32">
+                  <img src="{{ asset('img/contestants/sq/'.$contestant->prev->photo_path.'-sq.png')}}"
+                  class="w-32 rounded-md"
+                  alt="{{ucwords($contestant->prev->name)}}">
                </a>
-               <a href="{{ route('event.score', [$event->id, $contestant->id == $contestant->max ? 1 : $contestant->id + 1]) }}"
+               <a href="{{ route('event.score', [$event->id, $photo_next = $contestant->id == $contestant->max ? 1 : $contestant->id + 1]) }}"
                   class="w-52 flex flex-col items-center">
                   <p class="text-sm text-gray-600 pb-2">{{ ucwords($contestant->next->name) }}</p>
-                  <img src="https://placehold.co/300x300" alt="" class="w-32">
+                  <img src="{{ asset('img/contestants/sq/'.$contestant->next->photo_path.'-sq.png')}}"
+                    class="w-32 rounded-md"
+                    alt="{{ucwords($contestant->next->name)}}">
                </a>
             </div>
          </div>

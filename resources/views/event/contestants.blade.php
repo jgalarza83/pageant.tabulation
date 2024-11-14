@@ -11,7 +11,8 @@
     <div class="m-10 grid xl:grid-cols-6 max-lg:grid-cols-4 gap-5">
     @foreach ($contestants as $contestant)
         <x-contestant-event link="{{ route('event.score', [$event->id, $contestant->id]) }}"
-            image="https://placehold.co/300x300" name="{{ $contestant->name }}" team="{{ $contestant->group_name }}"
+            image="{{ asset('img/contestants/sq/'.$contestant->photo_path.'-sq.png') }}"
+            name="{{ $contestant->name }}" team="{{ $contestant->group_name }}"
             color="{{ $contestant->color }}" />
     @endforeach
     </div>

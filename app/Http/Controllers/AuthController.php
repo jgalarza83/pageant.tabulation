@@ -9,8 +9,8 @@ class AuthController extends Controller
 {
     public function index()
     {
-        session()->remove('user');
         session()->remove('name');
+        session()->remove('role');
         return view('home');
     }
 
@@ -20,14 +20,15 @@ class AuthController extends Controller
             'passcode' => 'required',
         ])->validate();
 
-        $user = User::where('passcode', request()->passcode)->first(['id', 'name']);
+        $user = User::where('passcode', request()->passcode)->first(['id', 'name', 'role_id']);
         if (!$user)
             return back()->withErrors('Passcode not found');
-        $request->session()->put('user', $user->id);
-        $request->session()->put('name', $user->name);
 
-        return session()->get('name') == 'admin' ?
-            redirect(route('score.index')):
+        $request->session()->put('name', $user->name);
+        $request->session()->put('role', $user->role_id);
+
+        return session()->get('role') === 1 ?
+            redirect(route('score.index')) :
             redirect(route('event.index'));
     }
 }

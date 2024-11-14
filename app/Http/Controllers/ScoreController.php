@@ -15,7 +15,7 @@ class ScoreController extends Controller
      */
     public function index()
     {
-        if (session()->get('name') != 'admin')
+        if (session()->get('role') != 1)
             return back();
 
         $events = Event::all('id', 'name');
@@ -70,6 +70,8 @@ class ScoreController extends Controller
      */
     public function store(Request $request)
     {
+        if (session()->get('role') != 2)
+            return back()->with('msg','Input Invalid');
         $data = $request->except(['_token', 'event_id', 'contestant_id']);
         foreach ($data as $id => $value) {
             $score = Score::where('user_id', session('user'))->
@@ -85,7 +87,7 @@ class ScoreController extends Controller
                     'score' => $value ?: 0,
                 ]);
         }
-        return back()->with('msg','Score has been recorded');
+        return back()->with('msg','Recorded');
     }
 
     /**

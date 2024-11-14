@@ -33,10 +33,12 @@ class DataSeeder extends Seeder
 
         // USERS Table
         $users = [
-            [1,'admin','1234'],
-            [2,'judge1','1111'],
-            [2,'judge2','2222'],
-            [2,'judge3','3333'],
+            [1,'Admin','1234'],
+            [2,'Jeanyvee Palmes','1111'],
+            [2,'Eliza Pantojan','2222'],
+            [2,'Ritchelle Maei N. Oring','3333'],
+            [2,'judge4','4444'],
+            [2,'judge5','5555'],
             [3,'guest','9876'],
         ];
         foreach ($users as $user)
@@ -68,19 +70,20 @@ class DataSeeder extends Seeder
 
         // EVENT Table
         $events = [
-            'photogenic',
-            'congeniality',
-            'people choice',
-            'creative jeans',
-            'production',
-            'sport',
-            'evening',
-            'picture analysis',
+            ['photogenic','photogenic'],
+            // ['congeniality','congeniality'],
+            // ['people choice','people']
+            ['creative jeans','jeans'],
+            ['production','production'],
+            ['sport attire','sport'],
+            ['evening gown','evening'],
+            // ['picture analysis','picture'],
         ];
 
         foreach ($events as $event)
             Event::create([
-                'name' => $event,
+                'name' => $event[0],
+                'photo_path' => $event[1],
             ]);
 
         // CRITERIA Table
@@ -117,22 +120,19 @@ class DataSeeder extends Seeder
 
         // CONTESTANTS Table
         $contestants = [
-            ["Beth Grace L. Patricio",1],
-            ["Patricia Mikaela T. Catigan",2],
-            ["Maureen Jane P. Mangmang",3],
-            ["Daphne Jeanne J. Omega",4],
-            ["Janna C. Priego",5],
-            ["Nizael A. Pardillo",6],
-            // ["TBA",7],
-            // ["TBA",8],
-            // ["TBA",9],
-            // ["TBA",10],
+            ["Beth Grace L. Patricio",1,'beth'],
+            ["Bebz A. Cabantao",2,'bebz'],
+            ["Maureen Jane P. Mangmang",3,'maureen'],
+            ["Nerimaie Sayman",4,'nerimaie'],
+            ["Janna C. Priego",5,'janna'],
+            ["Trixia Kris B. Orias",6,'trixia'],
         ];
 
         foreach ($contestants as $contestant)
             Contestant::create([
                 'name' => $contestant[0],
                 'group_id' => $contestant[1],
+                'photo_path' => $contestant[2],
             ]);
 
         // EVENT CRITERIA Table
@@ -144,34 +144,34 @@ class DataSeeder extends Seeder
             [1,5],
             [1,8],
             // Creative Jeans
-            [4,16],
-            [4,9],
-            [4,13],
-            [4,5],
-            [4,8],
+            [2,16],
+            [2,9],
+            [2,13],
+            [2,5],
+            [2,8],
             // Production Number
-            [5,20],
-            [5,12],
-            [5,13],
-            [5,7],
-            [5,5],
+            [3,20],
+            [3,12],
+            [3,13],
+            [3,7],
+            [3,5],
             // Sports Attire
-            [6,5],
-            [6,23],
-            [6,12],
-            [6,9],
-            [6,8],
-            [6,20],
-            [6,2],
+            [4,5],
+            [4,23],
+            [4,12],
+            [4,9],
+            [4,8],
+            [4,20],
+            [4,2],
             // Evening Wear
-            [7,9],
-            [7,11],
-            [7,18],
-            [7,5],
-            [7,23],
-            [7,20],
-            [7,1],
-            [7,2],
+            [5,9],
+            [5,11],
+            [5,18],
+            [5,5],
+            [5,23],
+            [5,20],
+            [5,1],
+            [5,2],
             // Picture Analysis
             [8,19],
             [8,6],

@@ -4,12 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ScoreController;
-// use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EventCriteriaController;
-
-// Route::get('/', function () {
-//     return view('home');
-// });
 
 Route::get('/',[AuthController::class, 'index'])->name('auth.index');
 Route::post('/', [AuthController::class, 'login'])->name('auth.login');

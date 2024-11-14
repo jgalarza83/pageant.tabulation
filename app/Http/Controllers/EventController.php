@@ -15,7 +15,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::all('id', 'name');
+        $events = Event::all('id', 'name', 'photo_path');
         return view('event.index', compact('events'));
     }
 
@@ -74,6 +74,7 @@ class EventController extends Controller
             get([
                 'contestants.id',
                 'contestants.name',
+                'contestants.photo_path',
                 'groups.name as group_name',
                 'groups.color'
             ]);
@@ -84,10 +85,10 @@ class EventController extends Controller
     {
         $event = Event::where('id', $event)->first(['id', 'name']);
 
-        $contestant = Contestant::where('id', $contestant)->first(['id', 'name']);
+        $contestant = Contestant::where('id', $contestant)->first(['id', 'name','photo_path']);
         $contestant['max'] = Contestant::count();
-        $contestant['prev'] = Contestant::where('id', $contestant['id'] == 1 ? $contestant['max'] : $contestant['id'] - 1)->first('name');
-        $contestant['next'] = Contestant::where('id', $contestant['id'] == $contestant['max'] ? 1 : $contestant['id'] + 1)->first('name');
+        $contestant['prev'] = Contestant::where('id', $contestant['id'] == 1 ? $contestant['max'] : $contestant['id'] - 1)->first(['name','photo_path']);
+        $contestant['next'] = Contestant::where('id', $contestant['id'] == $contestant['max'] ? 1 : $contestant['id'] + 1)->first(['name','photo_path']);
 
         $criterias = EventCriteria::
             join('criterias', 'criterias.id', 'event_criterias.criteria_id')->
