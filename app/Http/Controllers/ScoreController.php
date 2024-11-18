@@ -38,7 +38,6 @@ class ScoreController extends Controller
                         ->where('user_id', $judge->id)
                         ->get()
                         as $score)
-
                         $myScore += number_format($score->scoreWeight, 2);
                     $scoreByJudge[$judge->name] = $myScore;
                     $scores[$contestant->name] = $scoreByJudge;
@@ -66,7 +65,9 @@ class ScoreController extends Controller
             }
             $byContestants[$contestant->name] = $scores;
         }
-        return view('score.index', compact('judges', 'byEvents', 'byContestants'));
+
+        $leaders = $this->leaders();
+        return view('score.index', compact('judges', 'byEvents', 'byContestants', 'leaders'));
     }
 
     /**
@@ -85,7 +86,7 @@ class ScoreController extends Controller
                 where('scores.criteria_id', $id)->
                 first();
 
-            $weight = EventCriteria::where('id',$id)->first('weight');
+            $weight = EventCriteria::where('id', $id)->first('weight');
 
             if ($score == null)
                 Score::create([
@@ -112,10 +113,15 @@ class ScoreController extends Controller
     public function leaders()
     {
         $scores = [];
-        $contestants = Contestant::all('id');
-
+        $contestants = Contestant::all(['id', 'name']);
         foreach ($contestants as $contestant)
-            $scores[$contestant->id] = Score::where('contestant_id', $contestant->id)->sum('score');
-        dd($scores);
+            $scores[$contestant->name] = Score::where('contestant_id', $contestant->id)->sum('scoreWeight');
+        arsort($scores);
+        foreach ($scores as $name => $score)
+            $scores[] = [
+                'name' => $name,
+                'score' => $score,
+            ];
+        return $scores;
     }
 }

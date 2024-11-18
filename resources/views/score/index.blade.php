@@ -13,9 +13,9 @@
       @endforeach
    </div>
    <div class="grid grid-cols-3 w-1/2 mx-auto my-10 justify-items-center">
-         <x-winners header="Winner"><a href="{{route('score.leaders')}}">First</a></x-winners>
-         <x-winners header="First Runner">second</x-winners>
-         <x-winners header="Second Runner">third</x-winners>
+         <x-winners header="Winner">{{$leaders[0]['name']}}</x-winners>
+         <x-winners header="First Runner">{{$leaders[1]['name']}}</x-winners>
+         <x-winners header="Second Runner">{{$leaders[2]['name']}}</x-winners>
    </div>
    <div class="flex justify-center mt-5 gap-20">
       <div class="xl:w-1/4 md:w-96 ">
