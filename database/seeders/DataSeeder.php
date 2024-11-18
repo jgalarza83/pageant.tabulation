@@ -71,8 +71,8 @@ class DataSeeder extends Seeder
             ['production number',10,'production'],
             ['sport attire',10,'sport'],
             ['evening gown',20,'evening'],
-            ['Q/A',40,'photogenic'],
-            ['Final Question','','creative']
+            ['Q/A',40,'qa'],
+            ['Final Question','','final']
             // ['people choice','people'],
             // ['congeniality','congeniality'],
             // ['picture analysis','picture'],

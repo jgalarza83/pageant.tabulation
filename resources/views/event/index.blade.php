@@ -5,7 +5,7 @@
       @foreach ($events as $event)
          <x-category
             title="{{ ucwords($event->name) }}"
-            image="{{ asset('img/events/'.$event->photo_path.'.jpg')}}"
+            image="{{ asset('img/events/'.$event->photo_path.'.png')}}"
             link="{{ route('event.contestants', $event->id) }}"
          />
       @endforeach
