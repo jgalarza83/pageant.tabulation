@@ -78,6 +78,8 @@ class EventController extends Controller
                 'groups.name as group_name',
                 'groups.color'
             ]);
+        if ($event->id == 1)
+            return view('event.photogenic', compact('event', 'contestants'));
         return view('event.contestants', compact('event', 'contestants'));
     }
 
@@ -85,10 +87,10 @@ class EventController extends Controller
     {
         $event = Event::where('id', $event)->first(['id', 'name']);
 
-        $contestant = Contestant::where('id', $contestant)->first(['id', 'name','photo_path']);
+        $contestant = Contestant::where('id', $contestant)->first(['id', 'name', 'photo_path']);
         $contestant['max'] = Contestant::count();
-        $contestant['prev'] = Contestant::where('id', $contestant['id'] == 1 ? $contestant['max'] : $contestant['id'] - 1)->first(['name','photo_path']);
-        $contestant['next'] = Contestant::where('id', $contestant['id'] == $contestant['max'] ? 1 : $contestant['id'] + 1)->first(['name','photo_path']);
+        $contestant['prev'] = Contestant::where('id', $contestant['id'] == 1 ? $contestant['max'] : $contestant['id'] - 1)->first(['name', 'photo_path']);
+        $contestant['next'] = Contestant::where('id', $contestant['id'] == $contestant['max'] ? 1 : $contestant['id'] + 1)->first(['name', 'photo_path']);
 
         $criterias = EventCriteria::
             join('criterias', 'criterias.id', 'event_criterias.criteria_id')->

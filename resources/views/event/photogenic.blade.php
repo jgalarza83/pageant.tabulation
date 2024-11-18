@@ -9,8 +9,9 @@
     <x-header-title class="my-10">{{ ucwords($event->name) }}</x-header-title>
     <div class="m-10 grid xl:grid-cols-6 md:grid-cols-4 gap-5">
     @foreach ($contestants as $contestant)
-        <x-contestant-event link="{{ route('event.score', [$event->id, $contestant->id]) }}"
-            image="{{ asset('img/contestants/sq/'.$contestant->photo_path.'-sq.png') }}"
+        <x-photogenic-photo link="{{ route('event.score', [$event->id, $contestant->id]) }}"
+            image="https://placehold.co/300x600"
+            {{-- {{ asset('img/photogenic/'.$contestant->photo_path.'.png') }} --}}
             name="{{ $contestant->name }}" team="{{ $contestant->group_name }}"
             color="{{ $contestant->color }}" />
     @endforeach

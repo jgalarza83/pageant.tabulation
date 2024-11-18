@@ -56,10 +56,6 @@ class DataSeeder extends Seeder
             ['Swift Sparrows', 'sparrows'],
             ['C# Pelicans', 'pelicans'],
             ['PHP Hawks', 'hawks'],
-            // ['TypeScript Terns', 'terns'],
-            // ['CSS Cardinals', 'cardinals'],
-            // ['Scala Skylarks', 'skylarks'],
-            // ['HTML Hummingbirds', 'hummingbirds'],
         ];
 
         foreach ($groups as $group)
@@ -71,12 +67,13 @@ class DataSeeder extends Seeder
         // EVENT Table
         $events = [
             ['photogenic','photogenic'],
-            // ['congeniality','congeniality'],
-            // ['people choice','people']
-            ['creative jeans','jeans'],
-            ['production','production'],
+            ['creative attire','creative'],
+            ['production number','production'],
             ['sport attire','sport'],
             ['evening gown','evening'],
+            ['Q&A','evening'],
+            // ['people choice','people'],
+            // ['congeniality','congeniality'],
             // ['picture analysis','picture'],
         ];
 
@@ -88,26 +85,26 @@ class DataSeeder extends Seeder
 
         // CRITERIA Table
         $criterias = [
-            'appearance',
+            'appearance',                   // 1
             'audience impact',
             'charisma',
             'clarity',
-            'confidence',
+            'confidence',                   // 5
             'content',
             'coordination',
             'creativity',
             'design appropriateness',
-            'diction',
+            'diction',                      // 10
             'elegance',
             'energy',
             'execution',
             'facial expresion',
-            'impact',
+            'impact',                       // 15
             'originality',
             'overall',
             'poise',
             'relevance',
-            'stage presence',
+            'stage presence',               // 20
             'time management',
             'visual appeal',
             'walk',
@@ -120,12 +117,12 @@ class DataSeeder extends Seeder
 
         // CONTESTANTS Table
         $contestants = [
-            ["Beth Grace L. Patricio",1,'beth'],
-            ["Bebz A. Cabantao",2,'bebz'],
             ["Maureen Jane P. Mangmang",3,'maureen'],
-            ["Nerimaie Sayman",4,'nerimaie'],
-            ["Janna C. Priego",5,'janna'],
+            ["Bebz A. Cabantao",2,'bebz'],
             ["Trixia Kris B. Orias",6,'trixia'],
+            ["Janna C. Priego",5,'janna'],
+            ["Nerimaie Sayman",4,'nerimaie'],
+            ["Beth Grace L. Patricio",1,'beth'],
         ];
 
         foreach ($contestants as $contestant)
@@ -138,54 +135,54 @@ class DataSeeder extends Seeder
         // EVENT CRITERIA Table
         $event_criterias = [
             // Photogenic
-            [1,14],
-            [1,22],
-            [1,3],
-            [1,5],
-            [1,8],
-            // Creative Jeans
-            [2,16],
-            [2,9],
-            [2,13],
-            [2,5],
-            [2,8],
+            [1,14,30],
+            [1,22,30],
+            [1,3,20],
+            [1,5,20],
+            // Creative Attire
+            [2,16,30],
+            [2,9,30],
+            [2,13,10],
+            [2,5,10],
+            [2,8,20],
             // Production Number
-            [3,20],
-            [3,12],
-            [3,13],
-            [3,7],
-            [3,5],
+            [3,20,40],
+            [3,13,30],
+            [3,7,15],
+            [3,5,15],
             // Sports Attire
-            [4,5],
-            [4,23],
-            [4,12],
-            [4,9],
-            [4,8],
-            [4,20],
-            [4,2],
+            [4,5,35],
+            [4,9,25],
+            [4,8,15],
+            [4,20,15],
+            [4,2,10],
             // Evening Wear
-            [5,9],
-            [5,11],
-            [5,18],
-            [5,5],
-            [5,23],
-            [5,20],
-            [5,1],
-            [5,2],
+            [5,9,20],
+            [5,11,30],
+            [5,20,30],
+            [5,1,10],
+            [5,5,10],
+            // Q&A
+            [6,19,35],
+            [6,4,25],
+            [6,15,25],
+            [6,5,10],
+            [6,21,5],
             // Picture Analysis
-            [8,19],
-            [8,6],
-            [8,4],
-            [8,10],
-            [8,15],
-            [8,5],
-            [8,21],
+            // [8,19,null],
+            // [8,6,null],
+            // [8,4,null],
+            // [8,10,null],
+            // [8,15,null],
+            // [8,5,null],
+            // [8,21,null],
         ];
 
         foreach ($event_criterias as $criteria)
             EventCriteria::create([
                 'event_id' => $criteria[0],
                 'criteria_id' => $criteria[1],
+                'percentile' => $criteria[2],
             ]);
     }
 }

@@ -9,8 +9,9 @@ class AuthController extends Controller
 {
     public function index()
     {
-        session()->remove('name');
+        session()->remove('user');
         session()->remove('role');
+        session()->remove('name');
         return view('home');
     }
 
@@ -24,8 +25,9 @@ class AuthController extends Controller
         if (!$user)
             return back()->withErrors('Passcode not found');
 
-        $request->session()->put('name', $user->name);
+        $request->session()->put('user', $user->id);
         $request->session()->put('role', $user->role_id);
+        $request->session()->put('name', $user->name);
 
         return session()->get('role') === 1 ?
             redirect(route('score.index')) :

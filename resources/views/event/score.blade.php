@@ -1,13 +1,13 @@
 @extends('layouts.app')
 @section('content')
-   <div class="xl:mx-96 xl:w-1/2 flex gap-20">
+   <div class="xl:mx-96 w-1/2 flex gap-20">
       <img src="{{ asset('img/contestants/tall/'.$contestant->photo_path.'-tall.png')}}" alt="" class="self-start">
       <div>
          <x-nav-link href="{{ route('event.index') }}">
             <x-svg name="chevron_left" />Back to Events
          </x-nav-link>
-         <x-contestant-name class="mt-10">{{ ucwords($contestant->name) }}</x-contestant-name>
-         <x-header-title class="mb-10 text-xl text-gray-400">{{ ucwords($event->name) }}</x-header-title>
+         <x-contestant-name class="xl:mt-10 md:mt-5">{{ ucwords($contestant->name) }}</x-contestant-name>
+         <x-header-title class="xl:mb-10 md:mb-5 text-xl text-gray-400">{{ ucwords($event->name) }}</x-header-title>
 
          <div class="h-[38.5rem] flex flex-col justify-between">
             <form method="POST" class="grid gap-10" action="{{ route('score.store') }}">
@@ -19,7 +19,7 @@
                   @foreach ($criterias as $criteria)
                      <div>
                         <x-input-label class="text-lg"> {{ ucwords($criteria->criteria) }}</x-input-label>
-                        <x-text-input name="{{ $criteria->id }}" value="{{ $criteria->score }}" class="" />
+                        <x-text-input name="{{ $criteria->id }}" value="{{ $criteria->score }}" class="md:w-48" />
                      </div>
                   @endforeach
                </div>
