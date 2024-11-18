@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EventCriteria;
 use App\Models\User;
 use App\Models\Event;
 use App\Models\Score;
@@ -31,8 +32,14 @@ class ScoreController extends Controller
                 $scoreByJudge = [];
                 foreach ($judges as $judge) {
                     $myScore = 0;
-                    foreach (Score::where('event_id', $event->id)->where('contestant_id', $contestant->id)->where('user_id', $judge->id)->get() as $score)
-                        $myScore += $score->score;
+                    foreach (Score::where('scores.event_id', $event->id)
+                        ->join('event_criterias', 'event_criterias.id', 'scores.criteria_id')
+                        ->where('contestant_id', $contestant->id)
+                        ->where('user_id', $judge->id)
+                        ->get()
+                        as $score)
+
+                        $myScore += number_format($score->scoreWeight, 2);
                     $scoreByJudge[$judge->name] = $myScore;
                     $scores[$contestant->name] = $scoreByJudge;
                 }
@@ -46,8 +53,13 @@ class ScoreController extends Controller
                 $scoreByJudge = [];
                 foreach ($judges as $judge) {
                     $myScore = 0;
-                    foreach (Score::where('event_id', $event->id)->where('contestant_id', $contestant->id)->where('user_id', $judge->id)->get() as $score)
-                        $myScore += $score->score;
+                    foreach (Score::where('scores.event_id', $event->id)
+                        ->join('event_criterias', 'event_criterias.id', 'scores.criteria_id')
+                        ->where('contestant_id', $contestant->id)
+                        ->where('user_id', $judge->id)
+                        ->get()
+                        as $score)
+                        $myScore += number_format($score->scoreWeight, 2);
                     $scoreByJudge[$judge->name] = $myScore;
                 }
                 $scores[$event->name] = $scoreByJudge;
@@ -58,67 +70,52 @@ class ScoreController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
         if (session()->get('role') != 2)
-            return back()->with('msg','Input Invalid');
+            return back()->with('msg', 'Input Invalid');
+
         $data = $request->except(['_token', 'event_id', 'contestant_id']);
         foreach ($data as $id => $value) {
             $score = Score::where('user_id', session('user'))->
-                where('event_id', $request->event_id)->
+                where('scores.event_id', $request->event_id)->
                 where('contestant_id', $request->contestant_id)->
-                where('criteria_id', $id)->update(['score' => $value ?: 0]);
-            if (!$score)
+                where('scores.criteria_id', $id)->
+                first();
+
+            $weight = EventCriteria::where('id',$id)->first('weight');
+
+            if ($score == null)
                 Score::create([
                     'user_id' => session('user'),
                     'event_id' => $request->event_id,
                     'contestant_id' => $request->contestant_id,
                     'criteria_id' => $id,
                     'score' => $value ?: 0,
+                    'scoreWeight' => ($value * $weight->weight) / 100 ?: 0,
                 ]);
+            else
+                Score::where('user_id', session('user'))->
+                    where('scores.event_id', $request->event_id)->
+                    where('contestant_id', $request->contestant_id)->
+                    where('scores.criteria_id', $id)->
+                    update([
+                        'score' => $value,
+                        'scoreWeight' => ($value * $weight->weight) / 100,
+                    ]);
         }
-        return back()->with('msg','Recorded');
+        return back()->with('msg', 'Recorded');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Score $score)
+    public function leaders()
     {
-        //
-    }
+        $scores = [];
+        $contestants = Contestant::all('id');
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Score $score)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Score $score)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Score $score)
-    {
-        //
+        foreach ($contestants as $contestant)
+            $scores[$contestant->id] = Score::where('contestant_id', $contestant->id)->sum('score');
+        dd($scores);
     }
 }

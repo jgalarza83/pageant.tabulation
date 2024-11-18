@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('event_id');
             $table->foreignId('criteria_id');
-            $table->integer('percentile')->nullable();
+            $table->integer('weight')->nullable();
             $table->timestamps();
         });
     }

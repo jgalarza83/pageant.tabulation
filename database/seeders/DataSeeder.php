@@ -66,12 +66,13 @@ class DataSeeder extends Seeder
 
         // EVENT Table
         $events = [
-            ['photogenic','photogenic'],
-            ['creative attire','creative'],
-            ['production number','production'],
-            ['sport attire','sport'],
-            ['evening gown','evening'],
-            ['Q&A','evening'],
+            ['photogenic','','photogenic'],
+            ['creative attire',20,'creative'],
+            ['production number',10,'production'],
+            ['sport attire',10,'sport'],
+            ['evening gown',20,'evening'],
+            ['Q/A',40,'photogenic'],
+            ['Final Question','','creative']
             // ['people choice','people'],
             // ['congeniality','congeniality'],
             // ['picture analysis','picture'],
@@ -80,7 +81,8 @@ class DataSeeder extends Seeder
         foreach ($events as $event)
             Event::create([
                 'name' => $event[0],
-                'photo_path' => $event[1],
+                'weight' => $event[1],
+                'photo_path' => $event[2],
             ]);
 
         // CRITERIA Table
@@ -182,7 +184,7 @@ class DataSeeder extends Seeder
             EventCriteria::create([
                 'event_id' => $criteria[0],
                 'criteria_id' => $criteria[1],
-                'percentile' => $criteria[2],
+                'weight' => $criteria[2],
             ]);
     }
 }

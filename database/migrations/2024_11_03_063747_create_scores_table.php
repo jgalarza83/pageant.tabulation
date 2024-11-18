@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('contestant_id');
             $table->foreignId('criteria_id');
             $table->integer('score')->nullable();
+            $table->integer('scoreWeight')->nullable();
             $table->timestamps();
         });
     }

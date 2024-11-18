@@ -31,5 +31,6 @@ Route::resource('eventcriteria', EventCriteriaController::class);
 Route::resource('score', ScoreController::class);
 
 Route::post('event/score', [ScoreController::class,'store'])->name('score.store');
+Route::get('leaders', [ScoreController::class,'leaders'])->name('score.leaders');
 
 // require __DIR__.'/auth.php';

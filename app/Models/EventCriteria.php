@@ -10,6 +10,6 @@ class EventCriteria extends Model
     protected $fillable = [
         'event_id',
         'criteria_id',
-        'percentile',
+        'weight',
     ];
 }

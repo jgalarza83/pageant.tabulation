@@ -9,6 +9,7 @@ class Event extends Model
     protected $primaryKey = 'event_id';
     protected $fillable = [
         'name',
+        'weight',
         'photo_path',
     ];
 }

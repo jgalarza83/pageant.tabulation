@@ -107,7 +107,7 @@ class EventController extends Controller
         foreach ($criterias as $criteria)
             foreach ($scores as $score)
                 if ($criteria['id'] == $score['criteria_id']) {
-                    $criteria['score'] = $score['score'];
+                    $criteria['score'] = $score['score'] ?: 0;
                     break;
                 }
         return view('event.score', compact('event', 'contestant', 'criterias'));

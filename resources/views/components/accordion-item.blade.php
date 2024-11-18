@@ -6,7 +6,7 @@
       <div class="grid grid-cols-2 justify-between px-2 py-3 w-full text-gray-600">
          <span class="font-bold text-sm">{{ ucwords($label) }}</span>
          @php $total = 0 @endphp
-         <div class="grid grid-cols-7 md:gap-x-0">
+         <div class="grid grid-cols-7 md:gap-x-0 mr-4">
 
             @foreach ($judges as $score)
                <span class="text-center text-gray-400">{{ $score }}</span>

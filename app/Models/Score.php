@@ -13,5 +13,6 @@ class Score extends Model
         'contestant_id',
         'criteria_id',
         'score',
+        'scoreWeight',
     ];
 }
