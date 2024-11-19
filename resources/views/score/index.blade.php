@@ -12,7 +12,7 @@
          <span class="text-gray-300">|</span>
       @endforeach
    </div>
-   <div class="grid grid-cols-3 xl:w-1/2 md:w-full md:px-14 mx-auto my-10 justify-items-center">
+   <div class="grid grid-cols-3 xl:w-[64%] md:w-full md:px-14 mx-auto my-10 justify-items-center">
          <x-winners header="Winner">{{$leaders[0]['name'].' | '.$leaders[0]['score']}}</x-winners>
          <x-winners header="First Runner">{{$leaders[1]['name'].' | '.$leaders[1]['score']}}</x-winners>
          <x-winners header="Second Runner">{{$leaders[2]['name'].' | '.$leaders[2]['score']}}</x-winners>

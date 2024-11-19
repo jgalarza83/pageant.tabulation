@@ -114,8 +114,11 @@ class ScoreController extends Controller
     {
         $scores = [];
         $contestants = Contestant::all(['id', 'name']);
-        foreach ($contestants as $contestant)
-            $scores[$contestant->name] = Score::where('contestant_id', $contestant->id)->sum('scoreWeight');
+        foreach ($contestants as $contestant) {
+            $weight = Event::join('scores','events.id','scores.event_id')->where('contestant_id', $contestant->id)->first(['name','weight']);
+            $score = Score::where('contestant_id', $contestant->id)->sum('scoreWeight');
+            $scores[$contestant->name] = ($score * ($weight->weight ?? 1))/10; // TODO: Check computation
+        }
         arsort($scores);
         foreach ($scores as $name => $score)
             $scores[] = [
