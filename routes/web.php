@@ -16,7 +16,7 @@ Route::get('{event}/{contestant}/score', [EventController::class, 'score'])->nam
 Route::get('/score/recorded', [EventController::class, 'submit'])->name('event.submit');
 
 Route::resource('eventcriteria', EventCriteriaController::class);
-Route::resource('score', ScoreController::class);
+// Route::resource('score', ScoreController::class);
 
 Route::post('event/score', [ScoreController::class,'store'])->name('score.store');
 Route::post('event', [ScoreController::class,'photogenic'])->name('score.photogenic');
