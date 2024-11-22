@@ -19,56 +19,9 @@ class EventController extends Controller
         return view('event.index', compact('events'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Event $event)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Event $event)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Event $event)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Event $event)
-    {
-        //
-    }
-
     public function show_contestants($event)
     {
+        $photogenic = Score::where('event_id',1)->where('score','>',0)->where('user_id',session('user'))->first(['contestant_id']);
         $event = Event::where('id', $event)->first(['id', 'name']);
         $contestants = Contestant::join('groups', 'groups.id', 'group_id')->
             get([
@@ -79,11 +32,11 @@ class EventController extends Controller
                 'groups.color'
             ]);
         if ($event->id == 1)
-            return view('event.photogenic', compact('event', 'contestants'));
+            return view('event.photogenic', compact('event', 'contestants', 'photogenic'));
         return view('event.contestants', compact('event', 'contestants'));
     }
 
-    public function add_score($event, $contestant)
+    public function score($event, $contestant)
     {
         $event = Event::where('id', $event)->first(['id', 'name']);
 

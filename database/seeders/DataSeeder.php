@@ -137,10 +137,10 @@ class DataSeeder extends Seeder
         // EVENT CRITERIA Table
         $event_criterias = [
             // Photogenic
-            [1,14,30],
-            [1,22,30],
-            [1,3,20],
-            [1,5,20],
+            [1,17,1],
+            // [1,22,30],
+            // [1,3,20],
+            // [1,5,20],
             // Creative Attire
             [2,16,30],
             [2,9,30],

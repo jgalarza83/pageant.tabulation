@@ -1,4 +1,4 @@
 <label>
-   <input type="radio" name="photogenic" value="">
-   <img src="{{ $image }}" alt="{{ $name }}" class="relative rounded-md">
+   <input type="radio" name="{{ $name }}" value="{{ $value }}" {{ $check }}>
+   <img src="{{ $image }}" alt="{{ $alt }}" class="relative rounded-md">
 </label>

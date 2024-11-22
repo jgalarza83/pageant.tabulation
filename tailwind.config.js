@@ -27,6 +27,9 @@ export default {
                 'skylarks' : '#333333',
                 'hummingbirds' : '#FC7F9C',
             },
+            screens: {
+                'portrait' : '768px',
+            }
         },
 
     },

@@ -1,13 +1,15 @@
 @extends('layouts.app')
 @section('content')
    <div class="xl:mx-96 w-1/2 flex gap-20">
-      <img src="{{ asset('img/contestants/tall/'.$contestant->photo_path.'-tall.png')}}" alt="" class="self-start">
+      <img src="{{ asset('img/contestants/tall/'.$contestant->photo_path.'-tall.png')}}" alt="" class="self-start portrait:-mx-24">
       <div>
          <x-nav-link href="{{ route('event.index') }}">
             <x-svg name="chevron_left" />Back to Events
          </x-nav-link>
          <x-contestant-name class="xl:mt-10 md:mt-5">{{ ucwords($contestant->name) }}</x-contestant-name>
-         <x-header-title class="xl:mb-10 md:mb-5 text-xl text-gray-400">{{ ucwords($event->name) }}</x-header-title>
+         <x-header-title class="xl:mb-10 md:mb-5 text-xl text-gray-400">{{ ucwords($event->name) }}  |
+            <span class="text-xs">10pts max / category</span>
+        </x-header-title>
 
          <div class="h-[38.5rem] flex flex-col justify-between">
             <form method="POST" class="grid gap-10" action="{{ route('score.store') }}">
